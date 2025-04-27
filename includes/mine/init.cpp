@@ -8,10 +8,10 @@ bool windowResized = false;
 int WINDOW_WIDTH = 0;
 int WINDOW_HEIGHT = 0;
 
-char* OpenGL_Vendor = nullptr;
-char* OpenGL_Renderer = nullptr;
-char* OpenGL_Version = nullptr;
-char* GLSL_Version = nullptr;
+char *OpenGL_Vendor = nullptr;
+char *OpenGL_Renderer = nullptr;
+char *OpenGL_Version = nullptr;
+char *GLSL_Version = nullptr;
 
 void resizeFunc(GLFWwindow *window, int w, int h)
 {
@@ -42,7 +42,7 @@ GLFWwindow *initGLFWGLAD()
         return nullptr;
 
     loadOpenGLInfo();
-    
+
     glfwSetFramebufferSizeCallback(window, resizeFunc);
 
     glEnable(GL_DEPTH_TEST);
@@ -56,50 +56,54 @@ GLFWwindow *initGLFWGLAD()
 
 void loadOpenGLInfo()
 {
-    const auto* glVendorPtr = glGetString(GL_VENDOR);
-    const auto* glRendererPtr = glGetString(GL_RENDERER);
-     const auto* glVersionPtr  = glGetString(GL_VERSION);
-     const auto* glGLSLVersionPtr = glGetString(GL_SHADING_LANGUAGE_VERSION);
+    const auto *glVendorPtr = glGetString(GL_VENDOR);
+    const auto *glRendererPtr = glGetString(GL_RENDERER);
+    const auto *glVersionPtr = glGetString(GL_VERSION);
+    const auto *glGLSLVersionPtr = glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-     int ptrLength = 0;
+    int ptrLength = 0;
 
-     while(glVendorPtr[ptrLength++]);
+    while (glVendorPtr[ptrLength++])
+        ;
 
-     OpenGL_Vendor = new char[ptrLength+1];
-     OpenGL_Vendor[ptrLength] = 0;
+    OpenGL_Vendor = new char[ptrLength + 1];
+    OpenGL_Vendor[ptrLength] = 0;
 
-     for(int i=0;i<ptrLength;++i)
-      OpenGL_Vendor[i] = (char)glVendorPtr[i];
+    for (int i = 0; i < ptrLength; ++i)
+        OpenGL_Vendor[i] = (char)glVendorPtr[i];
 
-      ptrLength = 0;
+    ptrLength = 0;
 
-      while(glRendererPtr[ptrLength++]);
- 
-      OpenGL_Renderer = new char[ptrLength+1];
-      OpenGL_Renderer[ptrLength] = 0;
- 
-      for(int i=0;i<ptrLength;++i)
-       OpenGL_Renderer[i] = (char)glRendererPtr[i];
+    while (glRendererPtr[ptrLength++])
+        ;
 
-       ptrLength = 0;
+    OpenGL_Renderer = new char[ptrLength + 1];
+    OpenGL_Renderer[ptrLength] = 0;
 
-       while(glVersionPtr[ptrLength++]);
-  
-       OpenGL_Version = new char[ptrLength+1];
-       OpenGL_Version[ptrLength] = 0;
-  
-       for(int i=0;i<ptrLength;++i)
+    for (int i = 0; i < ptrLength; ++i)
+        OpenGL_Renderer[i] = (char)glRendererPtr[i];
+
+    ptrLength = 0;
+
+    while (glVersionPtr[ptrLength++])
+        ;
+
+    OpenGL_Version = new char[ptrLength + 1];
+    OpenGL_Version[ptrLength] = 0;
+
+    for (int i = 0; i < ptrLength; ++i)
         OpenGL_Version[i] = (char)glVersionPtr[i];
 
-        ptrLength = 0;
+    ptrLength = 0;
 
-        while(glGLSLVersionPtr[ptrLength++]);
-   
-        GLSL_Version = new char[ptrLength+1];
-        GLSL_Version[ptrLength] = 0;
-   
-        for(int i=0;i<ptrLength;++i)
-         GLSL_Version[i] = (char)glGLSLVersionPtr[i];
+    while (glGLSLVersionPtr[ptrLength++])
+        ;
+
+    GLSL_Version = new char[ptrLength + 1];
+    GLSL_Version[ptrLength] = 0;
+
+    for (int i = 0; i < ptrLength; ++i)
+        GLSL_Version[i] = (char)glGLSLVersionPtr[i];
 }
 
 void terminateApp()
@@ -145,18 +149,16 @@ void terminateImGui()
 
 bool leftAltPressed = false, enterPressed = false, leftCtrlPressed = false;
 
+bool rightClickCurrentFrame = false, rightClickLastFrame = false;
+
+bool toggleCursorCaptured = false;
+
 void proccesEvents(GLFWwindow *window)
 {
     glfwPollEvents();
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE))
         glfwSetWindowShouldClose(window, true);
-
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2))
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-    if (glfwGetKey(window, GLFW_KEY_B))
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     leftAltPressed = glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS;
     enterPressed = glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS;
@@ -168,6 +170,19 @@ void proccesEvents(GLFWwindow *window)
 
     if (leftCtrlPressed && enterPressed)
         glfwSetWindowSize(window, 1080, 720);
+
+    rightClickCurrentFrame = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS;
+
+    if (rightClickCurrentFrame && !rightClickLastFrame)
+        toggleCursorCaptured = !toggleCursorCaptured;
+
+    if (toggleCursorCaptured)
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    else
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+     
+
+    rightClickLastFrame = rightClickCurrentFrame;
 }
 
 void terminateGLFW(GLFWwindow *window)

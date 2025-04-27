@@ -66,12 +66,12 @@ const glm::mat4 &Camera::getProjection() const
     return projection;
 }
 
-glm::vec3& Camera::getFront()
+glm::vec3 &Camera::getFront()
 {
     return front;
 }
 
-const glm::vec3& Camera::getFront() const
+const glm::vec3 &Camera::getFront() const
 {
     return front;
 }
@@ -86,27 +86,28 @@ void Camera::update(GLFWwindow *window)
         double newX, newY;
         glfwGetCursorPos(window, &newX, &newY);
 
-       // float xoffset = (float)newX - (float)lastX;
-       // float yoffset = (float)lastY - (float)newY;
+        float xoffset = newX - (width / 2.0f);
+        float yoffset = (height / 2.0f) - newY;
 
-       float xoffset = newX - (width / 2.0f);
-       float yoffset = (height / 2.0f) - newY;
 
-       // lastX = newX;
-       // lastY = newY;
+        static bool pressedNow = false, pressedLast = false;
 
-       if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
-        dont=!dont;
+        pressedNow = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS;
 
-        if(!dont)
+        if (pressedNow && !pressedLast)
+            dont = !dont;
+
+        pressedLast = pressedNow;
+
+        if (!dont)
         {
-       glfwSetCursorPos(window, width / 2.0f, height / 2.0f);
+            glfwSetCursorPos(window, width / 2.0f, height / 2.0f);
 
-        xoffset *= 0.1f;
-        yoffset *= 0.1f;
+            xoffset *= 0.1f;
+            yoffset *= 0.1f;
 
-        yaw += xoffset;
-        pitch += yoffset;
+            yaw += xoffset;
+            pitch += yoffset;
         }
 
         if (pitch > 89.0f)

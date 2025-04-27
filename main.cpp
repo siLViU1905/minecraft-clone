@@ -34,6 +34,8 @@ int main()
 {
     GLFWwindow *window = initGLFWGLAD();
 
+    glfwSwapInterval(0);
+
     ImGuiIO &io = initImGui(window);
 
     Camera camera(window, glm::vec3(0.f, 1.f, 2.f), 2.f);

@@ -46,7 +46,7 @@ public:
 
     void setSpeed(float speed);
 
-    bool dont = false;
+    bool dont = true;
 };
 
 #endif // __CAMERA_H__
