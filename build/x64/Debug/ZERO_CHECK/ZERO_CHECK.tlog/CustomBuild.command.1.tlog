@@ -1,0 +1,10 @@
+^C:\USERS\PITIC\ONEDRIVE\DOCUMENTS\DESKTOP\MINECRAFT CLONE\BUILD\CMAKEFILES\8A8E3687A4693B4ED918F67BDFFEDC0E\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone" "-BC:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone/build/sMine.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
