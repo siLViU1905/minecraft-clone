@@ -53,16 +53,18 @@ int main()
     srand(time(0));
 
     std::vector<std::string> faces{
-        "textures/right.png",
-        "textures/left.png",
-        "textures/top.png",
-        "textures/bottom.png",
-        "textures/front.png",
-        "textures/back.png"};
+        "textures/px.png",
+        "textures/nx.png",
+        "textures/py.png",
+        "textures/ny.png",
+        "textures/pz.png",
+        "textures/nz.png"};
 
-    //  Skybox skybox(&camera, faces);
-
+     
     WorldMap worldMap(&camera, glm::ivec3(-1, 0, -1), glm::ivec3(1, 1, 1));
+
+    Skybox skybox(&camera, faces);
+
 
     Inventory inv(&worldMap);
 
@@ -86,7 +88,7 @@ int main()
 
         worldMap.renderBlocks();
 
-        // skybox.render();
+        skybox.render();
 
         crosshair.render();
 
