@@ -11,20 +11,20 @@
 std::string lookingAtBlock(BlockType bt)
 {
     std::string rtr;
-    switch(bt)
+    switch (bt)
     {
-        case BlockType::GRASS:
-         rtr = "GRASS BLOCK";
-         break;
-         case BlockType::DIRT:
-         rtr = "DIRT BLOCK";
-         break;
-         case BlockType::STONE:
-         rtr = "STONE BLOCK";
-         break;
-         case BlockType::AIR:
-         rtr = "AIR BLOCK";
-         break;
+    case BlockType::GRASS:
+        rtr = "GRASS BLOCK";
+        break;
+    case BlockType::DIRT:
+        rtr = "DIRT BLOCK";
+        break;
+    case BlockType::STONE:
+        rtr = "STONE BLOCK";
+        break;
+    case BlockType::AIR:
+        rtr = "AIR BLOCK";
+        break;
     }
 
     return rtr;
@@ -34,26 +34,35 @@ int main()
 {
     GLFWwindow *window = initGLFWGLAD();
 
-    ImGuiIO& io = initImGui(window);
+    ImGuiIO &io = initImGui(window);
 
     Camera camera(window, glm::vec3(0.f, 1.f, 2.f), 2.f);
 
     Crosshair crosshair("shaders/crosshairVertex.glsl", "shaders/crosshairFragment.glsl");
 
+    std::string OpenGLVendor = "Vendor: ";
+    std::string OpenGLRenderer = "Renderer: ";
+    std::string OpenGLVersion = "Version: ";
+    std::string GLSLVersion = "GLSL Version: ";
+
+    OpenGLVendor += OpenGL_Vendor;
+    OpenGLRenderer += OpenGL_Renderer;
+    OpenGLVersion += OpenGL_Version;
+    GLSLVersion += GLSL_Version;
+
     srand(time(0));
 
-    std::vector<std::string> faces {
+    std::vector<std::string> faces{
         "textures/right.png",
         "textures/left.png",
         "textures/top.png",
         "textures/bottom.png",
         "textures/front.png",
-        "textures/back.png"
-    };
+        "textures/back.png"};
 
-  //  Skybox skybox(&camera, faces);
+    //  Skybox skybox(&camera, faces);
 
-    WorldMap worldMap(&camera, glm::ivec3(-1, 0, -1), glm::ivec3(1,1,1));
+    WorldMap worldMap(&camera, glm::ivec3(-1, 0, -1), glm::ivec3(1, 1, 1));
 
     Inventory inv(&worldMap);
 
@@ -65,12 +74,11 @@ int main()
 
     while (!glfwWindowShouldClose(window))
     {
-        if(windowResized)
+        if (windowResized)
         {
             camera.updateProjection(WINDOW_WIDTH, WINDOW_HEIGHT);
             windowResized = false;
         }
-        
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         double startRenderTime = glfwGetTime();
@@ -78,7 +86,7 @@ int main()
 
         worldMap.renderBlocks();
 
-       // skybox.render();
+        // skybox.render();
 
         crosshair.render();
 
@@ -100,19 +108,32 @@ int main()
 
         ImGui::Begin("Position");
 
-        ImGui::Text((std::string("x: ") + std::to_string(camera.getPosition().x)+
-        std::string("\ny: ") + std::to_string(camera.getPosition().y) + 
-        std::string("\nz: ") + std::to_string(camera.getPosition().z)).c_str());
+        ImGui::Text((std::string("x: ") + std::to_string(camera.getPosition().x) +
+                     std::string("\ny: ") + std::to_string(camera.getPosition().y) +
+                     std::string("\nz: ") + std::to_string(camera.getPosition().z))
+                        .c_str());
 
         ImGui::End();
 
         ImGui::Begin("Looks at");
 
-       ImGui::Text(lookingAtBlock(worldMap.lookingAt()).c_str());
+        ImGui::Text(lookingAtBlock(worldMap.lookingAt()).c_str());
 
         ImGui::End();
 
-       renderFrame();
+        ImGui::Begin("OpenGL Info");
+
+        ImGui::Text(OpenGLVendor.c_str());
+
+        ImGui::Text(OpenGLRenderer.c_str());
+
+        ImGui::Text(OpenGLVersion.c_str());
+
+        ImGui::Text(GLSLVersion.c_str());
+
+        ImGui::End();
+
+        renderFrame();
 
         glfwSwapBuffers(window);
 
@@ -122,7 +143,5 @@ int main()
         worldMap.proccesUserEvents(window);
     }
 
-    terminateImGui();
-
-    terminateGLFW(window);
+    terminateApp();
 }

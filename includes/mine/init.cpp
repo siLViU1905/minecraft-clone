@@ -8,6 +8,11 @@ bool windowResized = false;
 int WINDOW_WIDTH = 0;
 int WINDOW_HEIGHT = 0;
 
+char* OpenGL_Vendor = nullptr;
+char* OpenGL_Renderer = nullptr;
+char* OpenGL_Version = nullptr;
+char* GLSL_Version = nullptr;
+
 void resizeFunc(GLFWwindow *window, int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -21,9 +26,8 @@ GLFWwindow *initGLFWGLAD()
     if (!glfwInit())
         return nullptr;
 
-        glfwWindowHint(GLFW_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_VERSION_MINOR, 6);
-       
+    glfwWindowHint(GLFW_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_VERSION_MINOR, 6);
 
     GLFWwindow *window = glfwCreateWindow(1080, 720, "Minecraft", nullptr, nullptr);
     WINDOW_WIDTH = 1080;
@@ -37,15 +41,76 @@ GLFWwindow *initGLFWGLAD()
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         return nullptr;
 
+    loadOpenGLInfo();
+    
     glfwSetFramebufferSizeCallback(window, resizeFunc);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_DEBUG_OUTPUT);
-   // glDebugMessageCallback(MessageCallback, 0);
+    // glDebugMessageCallback(MessageCallback, 0);
 
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     return window;
+}
+
+void loadOpenGLInfo()
+{
+    const auto* glVendorPtr = glGetString(GL_VENDOR);
+    const auto* glRendererPtr = glGetString(GL_RENDERER);
+     const auto* glVersionPtr  = glGetString(GL_VERSION);
+     const auto* glGLSLVersionPtr = glGetString(GL_SHADING_LANGUAGE_VERSION);
+
+     int ptrLength = 0;
+
+     while(glVendorPtr[ptrLength++]);
+
+     OpenGL_Vendor = new char[ptrLength+1];
+     OpenGL_Vendor[ptrLength] = 0;
+
+     for(int i=0;i<ptrLength;++i)
+      OpenGL_Vendor[i] = (char)glVendorPtr[i];
+
+      ptrLength = 0;
+
+      while(glRendererPtr[ptrLength++]);
+ 
+      OpenGL_Renderer = new char[ptrLength+1];
+      OpenGL_Renderer[ptrLength] = 0;
+ 
+      for(int i=0;i<ptrLength;++i)
+       OpenGL_Renderer[i] = (char)glRendererPtr[i];
+
+       ptrLength = 0;
+
+       while(glVersionPtr[ptrLength++]);
+  
+       OpenGL_Version = new char[ptrLength+1];
+       OpenGL_Version[ptrLength] = 0;
+  
+       for(int i=0;i<ptrLength;++i)
+        OpenGL_Version[i] = (char)glVersionPtr[i];
+
+        ptrLength = 0;
+
+        while(glGLSLVersionPtr[ptrLength++]);
+   
+        GLSL_Version = new char[ptrLength+1];
+        GLSL_Version[ptrLength] = 0;
+   
+        for(int i=0;i<ptrLength;++i)
+         GLSL_Version[i] = (char)glGLSLVersionPtr[i];
+}
+
+void terminateApp()
+{
+    terminateImGui();
+    terminateGLFW(glfwGetCurrentContext());
+
+    delete[] OpenGL_Vendor;
+    delete[] OpenGL_Renderer;
+    delete[] OpenGL_Version;
+    delete[] GLSL_Version;
 }
 
 ImGuiIO &initImGui(GLFWwindow *window)

@@ -7,9 +7,18 @@
 extern bool windowResized;
 extern int WINDOW_WIDTH, WINDOW_HEIGHT;
 
+extern char* OpenGL_Vendor;
+extern char* OpenGL_Renderer;
+extern char* OpenGL_Version;
+extern char* GLSL_Version;
+
 void resizeFunc(GLFWwindow *window, int w, int h);
 
 GLFWwindow *initGLFWGLAD();
+
+void loadOpenGLInfo();
+
+void terminateApp();
 
 ImGuiIO &initImGui(GLFWwindow *window);
 
