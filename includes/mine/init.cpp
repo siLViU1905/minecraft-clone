@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include "../GLFW/glfw3native.h"
+#pragma comment(lib, "dwmapi.lib")
 
 bool windowResized = false;
 
@@ -53,6 +56,17 @@ GLFWwindow *initGLFWGLAD()
 
     return window;
 }
+
+#ifdef _WIN32
+
+void setCaptionColor(COLORREF color)
+{
+    HWND hwnd = glfwGetWin32Window(glfwGetCurrentContext());
+
+    DwmSetWindowAttribute(hwnd, DWMWA_CAPTION_COLOR, &color, sizeof(color));
+}
+
+#endif
 
 void loadOpenGLInfo()
 {

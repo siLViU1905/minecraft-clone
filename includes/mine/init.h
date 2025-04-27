@@ -4,6 +4,10 @@
 #include "../imgui/imgui_impl_glfw.h"
 #include "../imgui/imgui_impl_opengl3.h"
 
+#ifdef _WIN32
+#include <dwmapi.h>
+#endif
+
 extern bool windowResized;
 extern int WINDOW_WIDTH, WINDOW_HEIGHT;
 
@@ -15,6 +19,12 @@ extern char* GLSL_Version;
 void resizeFunc(GLFWwindow *window, int w, int h);
 
 GLFWwindow *initGLFWGLAD();
+
+#ifdef _WIN32
+
+void setCaptionColor(COLORREF color);
+
+#endif
 
 void loadOpenGLInfo();
 

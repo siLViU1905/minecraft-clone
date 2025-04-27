@@ -8,6 +8,7 @@
 #include "includes/game/Hud.h"
 #include "includes/game/Skybox.h"
 
+
 std::string lookingAtBlock(BlockType bt)
 {
     std::string rtr;
@@ -32,7 +33,11 @@ std::string lookingAtBlock(BlockType bt)
 
 int main()
 {
-    GLFWwindow *window = initGLFWGLAD();
+   GLFWwindow *window = initGLFWGLAD();
+
+   setCaptionColor(RGB(0,0,120));
+
+   float startFrameTime = 0.f, frameTime = 0.f;
 
     glfwSwapInterval(0);
 
@@ -51,6 +56,11 @@ int main()
     OpenGLRenderer += OpenGL_Renderer;
     OpenGLVersion += OpenGL_Version;
     GLSLVersion += GLSL_Version;
+
+    float ts = (float)glfwGetTime();
+
+    std::string renderTimeStr;
+    std::string frameTimeStr ;
 
     srand(time(0));
 
@@ -72,12 +82,13 @@ int main()
 
     std::string worldInitTime = std::string("World init time: ") + std::to_string(worldMap.getInitTime() * 1000) + std::string("ms");
 
-    double renderTime = 0.0;
+    float renderTime = 0.f;
 
     int buttonPressedNow = false, buttonPressedLast = false;
 
     while (!glfwWindowShouldClose(window))
     {
+        startFrameTime = (float)glfwGetTime();
         if (windowResized)
         {
             camera.updateProjection(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -85,7 +96,7 @@ int main()
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        double startRenderTime = glfwGetTime();
+       float startRenderTime = (float)glfwGetTime();
         camera.update(window);
 
         worldMap.renderBlocks();
@@ -106,7 +117,18 @@ int main()
 
         ImGui::Text(worldInitTime.c_str());
 
-        ImGui::Text((std::string("Render time: ") + std::to_string(renderTime * 1000) + std::string("ms")).c_str());
+        if((float)glfwGetTime() - ts > 0.5f)
+        {
+            ts = (float)glfwGetTime();
+            renderTimeStr = "Render time: ";
+            frameTimeStr = "FPS: ";
+            renderTimeStr += std::to_string(renderTime * 1000) + std::string("ms");
+            frameTimeStr += std::to_string(1.f / frameTime);
+        }
+
+        ImGui::Text(renderTimeStr.c_str());
+
+        ImGui::Text(frameTimeStr.c_str());
 
         ImGui::End();
 
@@ -141,10 +163,12 @@ int main()
 
         glfwSwapBuffers(window);
 
-        renderTime = glfwGetTime() - startRenderTime;
+        renderTime = (float)glfwGetTime() - startRenderTime;
 
         proccesEvents(window);
         worldMap.proccesUserEvents(window);
+
+        frameTime = (float)glfwGetTime() - startFrameTime;
     }
 
     terminateApp();
