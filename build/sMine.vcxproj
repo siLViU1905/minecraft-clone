@@ -316,7 +316,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\GL\glad.c" />
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\GL\glad.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_draw.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_widgets.cpp" />

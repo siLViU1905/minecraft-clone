@@ -15,7 +15,7 @@ set(CMAKE_SOLUTION_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/cmake)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 add_executable(sMine
-    includes/GL/glad.c
+    includes/GL/glad.cpp
     includes/imgui/imgui.cpp
     includes/imgui/imgui_draw.cpp
     includes/imgui/imgui_widgets.cpp
