@@ -4,7 +4,6 @@
 #include <time.h>
 #include <iostream>
 #include "includes/glm/gtc/type_ptr.hpp"
-#include "includes/game/Ray.h"
 #include "includes/game/WorldMap.h"
 #include "includes/game/Hud.h"
 #include "includes/game/Skybox.h"

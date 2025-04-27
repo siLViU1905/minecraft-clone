@@ -334,7 +334,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Block.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\TextureManager.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Crosshair.cpp" />
-    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Ray.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\WorldMap.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Hud.cpp" />
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Skybox.cpp" />

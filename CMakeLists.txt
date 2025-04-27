@@ -33,7 +33,6 @@ add_executable(sMine
     includes/game/Block.cpp
     includes/mine/TextureManager.cpp
     includes/game/Crosshair.cpp
-    includes/game/Ray.cpp
     includes/game/WorldMap.cpp
     includes/game/Hud.cpp
     includes/game/Skybox.cpp

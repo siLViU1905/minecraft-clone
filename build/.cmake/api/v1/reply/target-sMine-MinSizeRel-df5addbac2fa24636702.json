@@ -41,7 +41,7 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 44,
+				"line" : 43,
 				"parent" : 0
 			}
 		]
@@ -98,8 +98,7 @@
 				17,
 				18,
 				19,
-				20,
-				21
+				20
 			]
 		}
 	],
@@ -181,8 +180,7 @@
 				17,
 				18,
 				19,
-				20,
-				21
+				20
 			]
 		}
 	],
@@ -294,12 +292,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
 			"path" : "includes/game/Crosshair.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "includes/game/Ray.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
