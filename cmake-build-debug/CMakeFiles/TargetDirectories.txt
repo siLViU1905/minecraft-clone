@@ -1,0 +1,3 @@
+C:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone/cmake-build-debug/CMakeFiles/sMine.dir
+C:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/pitic/OneDrive/Documents/Desktop/minecraft clone/cmake-build-debug/CMakeFiles/rebuild_cache.dir

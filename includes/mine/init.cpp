@@ -63,7 +63,7 @@ void setCaptionColor(COLORREF color)
 {
     HWND hwnd = glfwGetWin32Window(glfwGetCurrentContext());
 
-    DwmSetWindowAttribute(hwnd, DWMWA_CAPTION_COLOR, &color, sizeof(color));
+   DwmSetWindowAttribute(hwnd, DWMWA_CAPTION_COLOR, &color, sizeof(color));
 }
 
 #endif

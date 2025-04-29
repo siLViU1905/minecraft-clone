@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\GL\glad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\VBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\VAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\EBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\init.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Crosshair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\WorldMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Hud.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{80B5D3B1-0C81-3EFF-89A8-A24C5EBCC80E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

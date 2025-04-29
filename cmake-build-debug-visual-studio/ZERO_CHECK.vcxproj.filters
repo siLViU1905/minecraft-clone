@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\cmake-build-debug-visual-studio\CMakeFiles\db5bcdab1e178420baae177a29c8cdbb\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BC76BF2E-08DF-39B6-A836-A7BB29610A04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
