@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26.0)  # Lower version for better compatibility
+cmake_minimum_required(VERSION 3.26.0)
 project(sMine)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -39,6 +39,7 @@ set(SOURCE_FILES
         includes/game/WorldMap.cpp
         includes/game/Hud.cpp
         includes/game/Skybox.cpp
+        includes/game/Light.cpp
 )
 
 add_executable(sMine ${SOURCE_FILES})

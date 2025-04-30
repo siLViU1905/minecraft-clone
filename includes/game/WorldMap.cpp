@@ -39,6 +39,11 @@ void WorldMap::initBuffers()
 
     blockVao.linkAttrib(blockVbo, 2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
     blockVao.enableAttrib(2);
+
+    lightVbo.setData(cube, sizeof(cube));
+
+    lightVao.linkAttrib(lightVbo, 0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
+    lightVao.enableAttrib(0);
 }
 
 void WorldMap::initTextures()
@@ -54,6 +59,7 @@ void WorldMap::initTextures()
 void WorldMap::initShaders()
 {
     blockShader.autoCompileAndLink("shaders/blockVertex.glsl", "shaders/blockFragment.glsl");
+    lightShader.autoCompileAndLink("shaders/lightVertex.glsl", "shaders/lightFragment.glsl");
 }
 
 void WorldMap::generateBlocks()
@@ -89,6 +95,11 @@ void WorldMap::updateBlocks()
                      pair.second.applyDownForce = false;
              }*/
         }
+}
+
+void WorldMap::updateLights()
+{
+    light.applyCamera(*camera, lightShader);
 }
 
 void WorldMap::renderBlockMultiThreaded(WorldMap *map, int start, int end)
@@ -176,9 +187,16 @@ void WorldMap::renderBlocks()
     for (auto &block : blocks)
     {
         block.second.applyCamera(*camera, blockShader);
+        block.second.applyLight(light, blockShader);
         block.second.render(blockVao, blockShader);
     }
 
+}
+
+void WorldMap::renderLights()
+{
+    updateLights();
+    light.render(lightVao, lightShader);
 }
 
 const double &WorldMap::getInitTime() const

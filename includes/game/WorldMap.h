@@ -2,6 +2,7 @@
 #define __MAP_H__
 #include "Block.h"
 #include <unordered_map>
+#include "Light.h"
 
 template <>
 struct std::hash<glm::vec3>
@@ -27,6 +28,12 @@ class WorldMap
     VAO blockVao;
     Shader blockShader;
 
+    VBO lightVbo;
+    VAO lightVao;
+    Shader lightShader;
+
+   
+
     void initBuffers();
 
     void initTextures();
@@ -36,6 +43,8 @@ class WorldMap
     void generateBlocks();
     
     void updateBlocks();
+
+    void updateLights();
 
     const Camera* camera;
 
@@ -67,7 +76,11 @@ void proccesUserEvents(GLFWwindow* window);
 
     WorldMap(const Camera* camera, const glm::ivec3 &mapStart, const glm::ivec3& mapEnd);
 
+    Light light;
+
     void renderBlocks();
+
+    void renderLights();
 
     const double& getInitTime() const;
 

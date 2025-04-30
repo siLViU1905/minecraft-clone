@@ -30,25 +30,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 49,
+				"line" : 45,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 21,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 54,
+				"line" : 50,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 15,
+				"line" : 13,
 				"parent" : 0
 			}
 		]
@@ -59,7 +59,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -std:c++20 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++20 -MD"
 				}
 			],
 			"includes" : 
@@ -100,7 +100,8 @@
 				17,
 				18,
 				19,
-				20
+				20,
+				21
 			]
 		}
 	],
@@ -116,7 +117,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD",
 				"role" : "flags"
 			},
 			{
@@ -187,7 +188,8 @@
 				17,
 				18,
 				19,
-				20
+				20,
+				21
 			]
 		}
 	],
@@ -317,6 +319,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "includes/game/Skybox.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "includes/game/Light.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

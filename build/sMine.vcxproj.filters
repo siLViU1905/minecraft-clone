@@ -64,6 +64,9 @@
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\CMakeLists.txt" />

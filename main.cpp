@@ -35,7 +35,9 @@ int main()
 {
    GLFWwindow *window = initGLFWGLAD();
 
+#ifdef _WIN32
    setCaptionColor(RGB(0,0,120));
+#endif
 
    float startFrameTime = 0.f, frameTime = 0.f;
 
@@ -74,6 +76,9 @@ int main()
 
      
     WorldMap worldMap(&camera, glm::ivec3(-1, 0, -1), glm::ivec3(1, 1, 1));
+    
+    worldMap.light.position = glm::vec3(0.f, 1.f, 0.f);
+    worldMap.light.scale(glm::vec3(1.f));
 
     Skybox skybox(&camera, faces);
 
@@ -100,6 +105,8 @@ int main()
         camera.update(window);
 
         worldMap.renderBlocks();
+
+        worldMap.renderLights();
 
         skybox.render();
 
@@ -156,6 +163,20 @@ int main()
         ImGui::Text(OpenGLVersion.c_str());
 
         ImGui::Text(GLSLVersion.c_str());
+
+        ImGui::End();
+
+
+        ImGui::Begin("Light");
+
+        ImGui::SliderFloat3("Light position", glm::value_ptr(worldMap.light.position), -10.f, 10.f);
+        ImGui::SliderFloat3("Light color", glm::value_ptr(worldMap.light.color), 0.f, 1.f);
+        ImGui::SliderFloat3("Light ambient", glm::value_ptr(worldMap.light.ambient), 0.f, 1.f);
+        ImGui::SliderFloat3("Light diffuse", glm::value_ptr(worldMap.light.diffuse), 0.f, 1.f);
+        ImGui::SliderFloat3("Light specular", glm::value_ptr(worldMap.light.specular), 0.f, 1.f);
+        ImGui::SliderFloat("Light constant", &worldMap.light.constant, 0.f, 1.f);
+        ImGui::SliderFloat("Light linear", &worldMap.light.linear, 0.f, 1.f);
+        ImGui::SliderFloat("Light quadratic", &worldMap.light.quadratic, 0.f, 1.f);
 
         ImGui::End();
 

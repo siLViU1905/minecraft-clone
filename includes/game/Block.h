@@ -7,6 +7,7 @@
 #include "../mine/TextureManager.h"
 #include "../glm/glm.hpp"
 #include "../mine/Camera.h"
+#include "Light.h"
 
 enum class BlockType
 {
@@ -40,6 +41,8 @@ class Block
     void applyModel(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation = glm::vec3(1.f), float angle = 0.f);
 
     void applyCamera(const Camera& camera, Shader& shader);
+
+    void applyLight(const Light& light, Shader& shader);
 
     glm::vec3& getPosition();
 
