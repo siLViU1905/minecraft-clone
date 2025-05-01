@@ -43,7 +43,7 @@
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\init.cpp">
+    <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\mine\auxiliary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\pitic\OneDrive\Documents\Desktop\minecraft clone\includes\game\Block.cpp">

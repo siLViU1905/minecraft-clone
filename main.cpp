@@ -1,4 +1,4 @@
-#include "includes/mine/init.h"
+#include "includes/mine/auxiliary.h"
 #include "includes/game/Block.h"
 #include "includes/game/Crosshair.h"
 #include <time.h>
@@ -124,7 +124,7 @@ int main()
 
         newFrame();
 
-        ImGui::Begin("Times");
+        ImGui::Begin("Info");
 
         ImGui::Text(worldInitTime.c_str());
 
@@ -140,6 +140,8 @@ int main()
         ImGui::Text(renderTimeStr.c_str());
 
         ImGui::Text(frameTimeStr.c_str());
+
+        ImGui::Text((std::string("RAM usage: ") + std::to_string(getRAMUsage() / 0x100000) + std::string("MB")).c_str());
 
         ImGui::End();
 

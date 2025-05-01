@@ -32,7 +32,7 @@ set(SOURCE_FILES
         includes/mine/EBO.cpp
         includes/mine/Camera.cpp
         includes/mine/Texture.cpp
-        includes/mine/init.cpp
+        includes/mine/auxiliary.cpp
         includes/game/Block.cpp
         includes/mine/TextureManager.cpp
         includes/game/Crosshair.cpp

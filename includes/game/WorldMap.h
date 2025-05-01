@@ -32,7 +32,9 @@ class WorldMap
     VAO lightVao;
     Shader lightShader;
 
-   
+    float lightRotationAngle;
+
+    float lightRotationTime;
 
     void initBuffers();
 
