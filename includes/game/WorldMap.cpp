@@ -91,6 +91,13 @@ void WorldMap::updateBlocks()
     for (auto &pair : blocks)
         if (pair.second.destroyed)
         {
+            pair.second.rotation += (float)glfwGetTime() - pair.second.rotationTime;
+
+            pair.second.rotationTime = (float)glfwGetTime();
+
+            if(pair.second.rotation > 360.f)
+                pair.second.rotation = 0.f;
+
             pair.second.applyModel(pair.second.position, glm::vec3(0.3f), glm::vec3(0.f, 1.f, 0.f), pair.second.rotation++);
             /* if (pair.second.applyDownForce)
              {

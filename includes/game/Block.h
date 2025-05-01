@@ -31,6 +31,8 @@ class Block
 
     float rotation;
 
+    float rotationTime;
+
     bool applyDownForce;
 
  public:

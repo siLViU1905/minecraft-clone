@@ -8,8 +8,6 @@ void Block::applyModel(const glm::vec3 &position, const glm::vec3 &scale, const 
     model = glm::mat4(1.f);
     model = glm::translate(model, position);
     model = glm::scale(model, scale);
-    if (angle > 360.f)
-        angle = 0.f;
     model = glm::rotate(model, glm::radians(angle), rotation);
 }
 
@@ -63,4 +61,5 @@ void Block::render(const VAO &vao, Shader &shader)
 
 Block::Block() : destroyed(false), rotation(0.f),applyDownForce(false)
 {
+    rotationTime = (float)glfwGetTime();
 }
