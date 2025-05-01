@@ -26,6 +26,8 @@ struct Light
 
   Light();
 
+  friend class WorldMap;
+
  private:
  glm::mat4 model;
 };

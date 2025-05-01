@@ -7,6 +7,7 @@
 #include "includes/game/WorldMap.h"
 #include "includes/game/Hud.h"
 #include "includes/game/Skybox.h"
+#include <fstream>
 
 
 std::string lookingAtBlock(BlockType bt)
@@ -75,17 +76,20 @@ int main()
         "textures/nz.png"};
 
      
-    WorldMap worldMap(&camera, glm::ivec3(-1, 0, -1), glm::ivec3(1, 1, 1));
+       glm::ivec3 mapStart = glm::ivec3(-1, 0, -1);
+         glm::ivec3 mapEnd = glm::ivec3(1, 1, 1);
+
+    WorldMap* worldMap = new WorldMap(&camera, mapStart, mapEnd);
     
-    worldMap.light.position = glm::vec3(0.f, 1.f, 0.f);
-    worldMap.light.scale(glm::vec3(1.f));
+    worldMap->light.position = glm::vec3(0.f, 1.f, 0.f);
+    worldMap->light.scale(glm::vec3(1.f));
 
     Skybox skybox(&camera, faces);
 
 
-    Inventory inv(&worldMap);
+    Inventory inv(worldMap);
 
-    std::string worldInitTime = std::string("World init time: ") + std::to_string(worldMap.getInitTime() * 1000) + std::string("ms");
+    std::string worldInitTime = std::string("World init time: ") + std::to_string(worldMap->getInitTime() * 1000) + std::string("ms");
 
     float renderTime = 0.f;
 
@@ -104,9 +108,9 @@ int main()
        float startRenderTime = (float)glfwGetTime();
         camera.update(window);
 
-        worldMap.renderBlocks();
+        worldMap->renderBlocks();
 
-        worldMap.renderLights();
+        worldMap->renderLights();
 
         skybox.render();
 
@@ -150,7 +154,7 @@ int main()
 
         ImGui::Begin("Looks at");
 
-        ImGui::Text(lookingAtBlock(worldMap.lookingAt()).c_str());
+        ImGui::Text(lookingAtBlock(worldMap->lookingAt()).c_str());
 
         ImGui::End();
 
@@ -169,14 +173,81 @@ int main()
 
         ImGui::Begin("Light");
 
-        ImGui::SliderFloat3("Light position", glm::value_ptr(worldMap.light.position), -10.f, 10.f);
-        ImGui::SliderFloat3("Light color", glm::value_ptr(worldMap.light.color), 0.f, 1.f);
-        ImGui::SliderFloat3("Light ambient", glm::value_ptr(worldMap.light.ambient), 0.f, 1.f);
-        ImGui::SliderFloat3("Light diffuse", glm::value_ptr(worldMap.light.diffuse), 0.f, 1.f);
-        ImGui::SliderFloat3("Light specular", glm::value_ptr(worldMap.light.specular), 0.f, 1.f);
-        ImGui::SliderFloat("Light constant", &worldMap.light.constant, 0.f, 1.f);
-        ImGui::SliderFloat("Light linear", &worldMap.light.linear, 0.f, 1.f);
-        ImGui::SliderFloat("Light quadratic", &worldMap.light.quadratic, 0.f, 1.f);
+        ImGui::SliderFloat3("Light position", glm::value_ptr(worldMap->light.position), -20.f, 20.f);
+        ImGui::SliderFloat3("Light color", glm::value_ptr(worldMap->light.color), 0.f, 1.f);
+        ImGui::SliderFloat3("Light ambient", glm::value_ptr(worldMap->light.ambient), 0.f, 1.f);
+        ImGui::SliderFloat3("Light diffuse", glm::value_ptr(worldMap->light.diffuse), 0.f, 1.f);
+        ImGui::SliderFloat3("Light specular", glm::value_ptr(worldMap->light.specular), 0.f, 1.f);
+        ImGui::SliderFloat("Light constant", &worldMap->light.constant, 0.f, 1.f);
+        ImGui::SliderFloat("Light linear", &worldMap->light.linear, 0.f, 1.f);
+        ImGui::SliderFloat("Light quadratic", &worldMap->light.quadratic, 0.f, 1.f);
+
+        if(ImGui::Button("Save"))
+        {
+            std::ofstream lightFile("options/lightValues.txt", std::ios::out | std::ios::trunc);
+
+            if(lightFile.is_open())
+            {
+                lightFile << worldMap->light.position.x << " " << worldMap->light.position.y << " " << worldMap->light.position.z << "\n";
+                lightFile << worldMap->light.color.x << " " << worldMap->light.color.y << " " << worldMap->light.color.z << "\n";
+                lightFile << worldMap->light.ambient.x << " " << worldMap->light.ambient.y << " " << worldMap->light.ambient.z << "\n";
+                lightFile << worldMap->light.diffuse.x << " " << worldMap->light.diffuse.y << " " << worldMap->light.diffuse.z << "\n";
+                lightFile << worldMap->light.specular.x << " " << worldMap->light.specular.y << " " << worldMap->light.specular.z << "\n";
+                lightFile << worldMap->light.constant << " " << worldMap->light.linear << " " << worldMap->light.quadratic;
+                lightFile.close();
+            }
+        }
+
+        if(ImGui::Button("Load"))
+        {
+            std::ifstream lightFile("options/lightValues.txt");
+
+            if(lightFile.is_open())
+            {
+                lightFile >> worldMap->light.position.x >> worldMap->light.position.y >> worldMap->light.position.z;
+                lightFile >> worldMap->light.color.x >> worldMap->light.color.y >> worldMap->light.color.z;
+                lightFile >> worldMap->light.ambient.x >> worldMap->light.ambient.y >> worldMap->light.ambient.z;
+                lightFile >> worldMap->light.diffuse.x >> worldMap->light.diffuse.y >> worldMap->light.diffuse.z;
+                lightFile >> worldMap->light.specular.x >> worldMap->light.specular.y >> worldMap->light.specular.z;
+                lightFile >> worldMap->light.constant >> worldMap->light.linear >> worldMap->light.quadratic;
+                lightFile.close();
+            }
+        }
+
+        ImGui::End();
+
+        ImGui::Begin("World");
+
+        if(ImGui::SliderInt3("Map start", glm::value_ptr(mapStart), -20, 0))
+            worldMap->resizeWorld(mapStart, mapEnd);
+        
+        if(ImGui::SliderInt3("Map end", glm::value_ptr(mapEnd), 0, 20))
+        worldMap->resizeWorld(mapStart, mapEnd);
+
+        if(ImGui::Button("Save"))
+        {
+            std::ofstream worldFile("options/worldValues.txt", std::ios::out | std::ios::trunc);
+
+            if(worldFile.is_open())
+            {
+                worldFile << mapStart.x << " " << mapStart.y << " " << mapStart.z << "\n";
+                worldFile << mapEnd.x << " " << mapEnd.y << " " << mapEnd.z;
+                worldFile.close();
+            }
+        }
+
+        if(ImGui::Button("Load"))
+        {
+            std::ifstream worldFile("options/worldValues.txt");
+
+            if(worldFile.is_open())
+            {
+                worldFile >> mapStart.x >> mapStart.y >> mapStart.z;
+                worldFile >> mapEnd.x >> mapEnd.y >> mapEnd.z;
+                worldFile.close();
+            }
+        }
+        
 
         ImGui::End();
 
@@ -187,10 +258,10 @@ int main()
         renderTime = (float)glfwGetTime() - startRenderTime;
 
         proccesEvents(window);
-        worldMap.proccesUserEvents(window);
+        worldMap->proccesUserEvents(window);
 
         frameTime = (float)glfwGetTime() - startFrameTime;
     }
-
+    delete worldMap;
     terminateApp();
 }

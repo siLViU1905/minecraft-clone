@@ -6,7 +6,7 @@ void Light::move(const glm::vec3& offset)
 {
     model = glm::mat4(1.f);
     position += offset;
-    model = glm::translate(model,offset);
+    model = glm::translate(model,position);
 }
 
 void Light::scale(const glm::vec3& scale)

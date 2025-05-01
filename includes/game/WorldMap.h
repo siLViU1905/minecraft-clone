@@ -86,6 +86,8 @@ void proccesUserEvents(GLFWwindow* window);
 
     BlockType lookingAt() const;
 
+    void resizeWorld(const glm::ivec3 &mapStart, const glm::ivec3& mapEnd);
+
     private:
     static constexpr float cube[288]={
         -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,

@@ -1,6 +1,7 @@
 #include "WorldMap.h"
 #include <thread>
 #include <iostream>
+#include "../glm/gtc/matrix_transform.hpp"
 
 WorldMap::WorldMap(const Camera *camera) : camera(camera), mapStart(glm::ivec3(-1, 0, -1)), mapEnd(glm::ivec3(1, 0, 1))
 {
@@ -99,7 +100,11 @@ void WorldMap::updateBlocks()
 
 void WorldMap::updateLights()
 {
+    light.model = glm::mat4(1.f);
+    light.model = glm::translate(light.model, light.position);
+    light.model = glm::scale(light.model, glm::vec3(1.f));
     light.applyCamera(*camera, lightShader);
+   
 }
 
 void WorldMap::renderBlockMultiThreaded(WorldMap *map, int start, int end)
@@ -226,4 +231,13 @@ BlockType WorldMap::lookingAt() const
             return blocks.at(blockPos).type;
     }
     return BlockType::AIR;
+}
+
+void WorldMap::resizeWorld(const glm::ivec3 &mapStart, const glm::ivec3& mapEnd)
+{
+    this->mapStart = mapStart;
+    this->mapEnd = mapEnd;
+    mapSize = mapEnd - mapStart;
+    blocks.clear();
+    generateBlocks();
 }
